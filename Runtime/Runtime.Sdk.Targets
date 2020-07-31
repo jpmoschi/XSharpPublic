@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <EnableDefaultItems>true</EnableDefaultItems>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-	<CommonFolder>c:\XSharp\DevRt\Common</CommonFolder>
+    <CommonFolder>c:\XSharp\DevRt\Common</CommonFolder>
     <RootNamespace>XSharp</RootNamespace>
     <XSharpProjectExtensionsPath>$(MSBuildExtensionsPath)\XSharp\</XSharpProjectExtensionsPath>
     <TargetFrameworkProfile />
@@ -17,7 +18,7 @@
     <CommandLineOption />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>	
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<Version>2.5.2</Version>
+    <Version>2.5.2</Version>
     <PPO>false</PPO>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -53,10 +54,6 @@
     <NamedArgs>false</NamedArgs>
     <MemVar>false</MemVar>
     <Undeclared>false</Undeclared>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <UseSharedCompilation>true</UseSharedCompilation>
   </PropertyGroup>
 </Project>
 
