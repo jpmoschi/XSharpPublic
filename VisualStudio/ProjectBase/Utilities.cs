@@ -981,11 +981,11 @@ namespace Microsoft.VisualStudio.Project
             return false;
         }
 
-        private const string _reservedName = "(\\b(nul|con|aux|prn)\\b)|(\\b((com|lpt)[0-9])\\b)";
-        private const string _invalidChars = "\\/:*?\"<>|";
-        private const string _regexToUseForFileName = _reservedName + "|" + _invalidChars;
-        private static Regex _unsafeFileNameCharactersRegex = new Regex(_regexToUseForFileName, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-        private static Regex _unsafeCharactersRegex = new Regex(_invalidChars, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        //private const string _reservedName = "(\\b(nul|con|aux|prn)\\b)|(\\b((com|lpt)[0-9])\\b)";
+        //private const string _invalidChars = "\\/:*?\"<>|";
+        //private const string _regexToUseForFileName = _reservedName + "|" + _invalidChars;
+        //private static Regex _unsafeFileNameCharactersRegex = new Regex(_regexToUseForFileName, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        //private static Regex _unsafeCharactersRegex = new Regex(_invalidChars, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         /// <summary>
         /// Checks whether a file part contains valid characters. The file part can be any part of a non rooted path.
         /// </summary>
@@ -993,53 +993,54 @@ namespace Microsoft.VisualStudio.Project
         /// <returns></returns>
         private static bool IsFilePartInValid(string filePart)
         {
-            if(String.IsNullOrEmpty(filePart))
-            {
-                return true;
-            }
-            String fileNameToVerify = filePart;
+            //if(String.IsNullOrEmpty(filePart))
+            //{
+            //    return true;
+            //}
+            //String fileNameToVerify = filePart;
 
-            // Define a regular expression that covers all characters that are not in the safe character sets.
-            // It is compiled for performance.
+            //// Define a regular expression that covers all characters that are not in the safe character sets.
+            //// It is compiled for performance.
 
-            // The filePart might still be a file and extension. If it is like that then we must check them separately, since different rules apply
-            string extension = String.Empty;
-            try
-            {
-                extension = Path.GetExtension(filePart);
-            }
-            // We catch the ArgumentException because we want this method to return true if the filename is not valid. FilePart could be for example #�&%"�&"% and that would throw ArgumentException on GetExtension
-            catch(ArgumentException)
-            {
-                return true;
-            }
+            //// The filePart might still be a file and extension. If it is like that then we must check them separately, since different rules apply
+            //string extension = String.Empty;
+            //try
+            //{
+            //    extension = Path.GetExtension(filePart);
+            //}
+            //// We catch the ArgumentException because we want this method to return true if the filename is not valid. FilePart could be for example #�&%"�&"% and that would throw ArgumentException on GetExtension
+            //catch(ArgumentException)
+            //{
+            //    return true;
+            //}
 
-            if(!String.IsNullOrEmpty(extension))
-            {
-                // Check the extension first
-                bool isMatch = _unsafeCharactersRegex.IsMatch(extension);
-                if(isMatch)
-                {
-                    return isMatch;
-                }
+            //if(!String.IsNullOrEmpty(extension))
+            //{
+            //    // Check the extension first
+            //    bool isMatch = _unsafeCharactersRegex.IsMatch(extension);
+            //    if(isMatch)
+            //    {
+            //        return isMatch;
+            //    }
 
-                // We want to verify here everything but the extension.
-                // We cannot use GetFileNameWithoutExtension because it might be that for example (..\\filename.txt) is passed in asnd that should fail, since that is not a valid filename.
-                fileNameToVerify = filePart.Substring(0, filePart.Length - extension.Length);
+            //    // We want to verify here everything but the extension.
+            //    // We cannot use GetFileNameWithoutExtension because it might be that for example (..\\filename.txt) is passed in asnd that should fail, since that is not a valid filename.
+            //    fileNameToVerify = filePart.Substring(0, filePart.Length - extension.Length);
 
-                if(String.IsNullOrEmpty(fileNameToVerify))
-                {
-                    return true;
-                }
-            }
+            //    if(String.IsNullOrEmpty(fileNameToVerify))
+            //    {
+            //        return true;
+            //    }
+            //}
 
-            // We verify CLOCK$ outside the regex since for some reason the regex is not matching the clock\\$ added.
-            if(String.Compare(fileNameToVerify, "CLOCK$", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                return true;
-            }
+            //// We verify CLOCK$ outside the regex since for some reason the regex is not matching the clock\\$ added.
+            //if(String.Compare(fileNameToVerify, "CLOCK$", StringComparison.OrdinalIgnoreCase) == 0)
+            //{
+            //    return true;
+            //}
 
-            return _unsafeFileNameCharactersRegex.IsMatch(fileNameToVerify);
+            //return _unsafeFileNameCharactersRegex.IsMatch(fileNameToVerify);
+            return false;
         }
 
         /// <summary>

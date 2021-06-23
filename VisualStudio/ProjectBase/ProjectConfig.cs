@@ -1219,7 +1219,7 @@ namespace Microsoft.VisualStudio.Project
 				bstrExe = targetInfo.bstrExe,
 				bstrPortName = targetInfo.bstrPortName,
 				bstrRemoteMachine = targetInfo.bstrRemoteMachine,
-				fSendToOutputWindow = targetInfo.fSendStdoutToOutputWindow,
+				fSendToOutputWindow = targetInfo.fSendStdoutToOutputWindow!=0,
 				guidLaunchDebugEngine = targetInfo.clsidCustom,
 				LaunchFlags = targetInfo.grfLaunch,
 				dlo = (uint)targetInfo.dlo,

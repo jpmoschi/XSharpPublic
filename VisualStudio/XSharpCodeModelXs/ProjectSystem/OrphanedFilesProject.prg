@@ -8,7 +8,6 @@ USING System.Collections.Generic
 USING System.Linq
 USING System.Text
 USING System.Threading.Tasks
-USING EnvDTE
 USING LanguageService.CodeAnalysis
 USING LanguageService.CodeAnalysis.XSharp
 
@@ -63,7 +62,7 @@ BEGIN NAMESPACE XSharpModel
          //
          RETURN FALSE
          
-      METHOD FindProject(sProject AS STRING) AS Project
+      METHOD FindProject(sProject AS STRING) AS Object
          //
          RETURN NULL
          

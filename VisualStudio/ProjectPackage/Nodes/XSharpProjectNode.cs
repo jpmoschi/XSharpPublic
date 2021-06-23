@@ -142,8 +142,11 @@ namespace XSharp.Project
             ThreadHelper.ThrowIfNotOnUIThread();
             lock (this)
             {
-                var task = (Microsoft.VisualStudio.Shell.Task)sender;
-                this.OpenElement(task.Document, task.Line, task.Column);
+                var task = (IVsTaskItem)sender;
+                task.Document(out var document);
+                task.Line(out var line);
+                task.Column(out var column);
+                this.OpenElement(document, line, column);
             }
         }
 
@@ -1199,7 +1202,7 @@ namespace XSharp.Project
         private void OnProjectWalkComplete(XProject xProject)
         {
             var tasks = this.ProjectModel.GetCommentTasks();
-            var list = new List<Task>();
+            var list = new List<IVsTaskItem>();
             _taskListManager.Clear();
             foreach (var task in tasks)
             {
@@ -1211,7 +1214,7 @@ namespace XSharp.Project
         private void OnFileWalkComplete(XFile xfile)
         {
             var tasks = this.ProjectModel.GetCommentTasks();
-            var list = new List<Task>();
+            var list = new List<IVsTaskItem>();
             _taskListManager.Clear();
             foreach (var task in tasks)
             {
@@ -1343,7 +1346,7 @@ namespace XSharp.Project
             });
             return list;
         }
-        public EnvDTE.Project FindProject(string sProject)
+        public object FindProject(string sProject)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 

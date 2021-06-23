@@ -289,7 +289,7 @@ namespace Microsoft.VisualStudio.Project
                 this.active = true;
 
 
-                Control cGrid = Control.FromHandle(new IntPtr(this.grid.Handle));
+                Control cGrid = Control.FromHandle(this.grid.Handle);
 
                 cGrid.Parent = Control.FromHandle(parent);//this.panel;
                 cGrid.Size = new Size(544, 294);
@@ -297,7 +297,7 @@ namespace Microsoft.VisualStudio.Project
                 cGrid.Visible = true;
                 this.grid.SetOption(_PROPERTYGRIDOPTION.PGOPT_TOOLBAR, false);
                 this.grid.GridSort = _PROPERTYGRIDSORT.PGSORT_CATEGORIZED | _PROPERTYGRIDSORT.PGSORT_ALPHABETICAL;
-                NativeMethods.SetParent(new IntPtr(this.grid.Handle), this.panel.Handle);
+                NativeMethods.SetParent(this.grid.Handle, this.panel.Handle);
                 UpdateObjects();
             }
             RegisterProjectEvents();
@@ -519,21 +519,17 @@ namespace Microsoft.VisualStudio.Project
                 new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
 
                 IntPtr p = Marshal.GetIUnknownForObject(this);
-                IntPtr ppUnk = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(IntPtr)));
+                IntPtr[] ppUnk = new IntPtr[1];
                 try
                 {
-                    Marshal.WriteIntPtr(ppUnk, p);
+                    ppUnk[0] = p;
                     this.BindProperties();
                     // BUGBUG -- this is really bad casting a pointer to "int"...
-                    this.grid.SetSelectedObjects(1, ppUnk.ToInt32());
+                    this.grid.SetSelectedObjects(1, ppUnk);
                     this.grid.Refresh();
                 }
                 finally
                 {
-                    if(ppUnk != IntPtr.Zero)
-                    {
-                        Marshal.FreeCoTaskMem(ppUnk);
-                    }
                     if(p != IntPtr.Zero)
                     {
                         Marshal.Release(p);

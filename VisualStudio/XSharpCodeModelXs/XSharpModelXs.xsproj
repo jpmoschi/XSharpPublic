@@ -39,7 +39,7 @@
     <VO14>false</VO14>
     <VO15>false</VO15>
     <VO16>false</VO16>
-    <XSharpProjectversion>2.8.1.12</XSharpProjectversion>
+    <XSharpProjectversion>2.8.2.13</XSharpProjectversion>
     <Includepaths>$(SolutionDir)\Common</Includepaths>
     <Nostandarddefs>true</Nostandarddefs>
     <NamedArgs>true</NamedArgs>
@@ -91,12 +91,12 @@
   </PropertyGroup>
   <Import Project="$(XSharpMsBuildDir)\XSharp.targets" />
   <ItemGroup>
-    <Reference Include="EnvDTE">
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>EnvDTE</Name>
+      <AssemblyName>envdte.dll</AssemblyName>
       <SpecificVersion>False</SpecificVersion>
-      <AssemblyName>EnvDTE.dll</AssemblyName>
+      <Private>True</Private>
       <HintPath>..\..\..\..\Program Files (x86)\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\envdte.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -187,10 +187,6 @@
   <ItemGroup>
     <None Include="..\..\Common\BuildNumber.h">
       <Link>BuildNumber.h</Link>
-    </None>
-    <None Include="..\..\External\Debug\SQLite.Interop.dll">
-      <Link>SQLite.Interop.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

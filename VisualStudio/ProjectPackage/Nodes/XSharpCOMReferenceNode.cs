@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.Project;
 using System.Reflection;
 using System.Diagnostics;
 using Microsoft.VisualStudio.Shell;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace XSharp.Project
 {

@@ -509,7 +509,7 @@ BEGIN NAMESPACE XSharpModel
             ENDIF
 
             SELF:RemoveProjectOutput(url)
-            prj := SELF:ProjectNode:FindProject(url)
+            prj := (EnvDTE.Project) SELF:ProjectNode:FindProject(url)
             IF prj != NULL .AND. SELF:_StrangerProjects:Contains(prj)
                SELF:_StrangerProjects:Remove(prj)
                RETURN TRUE
@@ -563,7 +563,7 @@ BEGIN NAMESPACE XSharpModel
                 existing := List<STRING>{}
                 FOREACH sProject AS STRING IN SELF:_unprocessedStrangerProjectReferences:ToArray()
                    LOCAL p AS EnvDTE.Project
-                   p := SELF:ProjectNode:FindProject(sProject)
+                   p := (EnvDTE.Project) SELF:ProjectNode:FindProject(sProject)
                    IF (p != NULL)
                       SELF:_StrangerProjects:Add(p)
                       outputFile := SELF:GetStrangerOutputDLL(sProject, p)
